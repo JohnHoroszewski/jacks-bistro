@@ -141,9 +141,14 @@ add_action( 'widgets_init', 'jb_ewm_widgets_init' );
  */
 function jb_ewm_scripts() {
 	wp_enqueue_style( 'jb_ewm-style', get_stylesheet_uri(), array(), _S_VERSION );
+	// Eneueue Slick Slider Styles
+	wp_enqueue_style( 'jb_ewm-slick-style', '//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css', array(), _S_VERSION );
+
 	wp_style_add_data( 'jb_ewm-style', 'rtl', 'replace' );
 
 	wp_enqueue_script( 'jb_ewm-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+	// Enqueue Slick Slider js
+	wp_enqueue_script( 'jb_ewm_slick_style', '//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array( 'jquery' ));
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -177,6 +182,9 @@ require get_template_directory() . '/inc/customizer.php';
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
+
+// Get Function-admin.php
+require get_template_directory() . '/inc/function-admin.php';
 
 // Remove Admin Bar
 add_filter('show_admin_bar', '__return_false');
