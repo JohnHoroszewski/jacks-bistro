@@ -147,14 +147,32 @@ function jb_ewm_scripts() {
 	wp_style_add_data( 'jb_ewm-style', 'rtl', 'replace' );
 
 	wp_enqueue_script( 'jb_ewm-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+	// Enqueue Fontawesome
+	wp_enqueue_script( 'jb_ewm-fontawesome', 'https://use.fontawesome.com/d8d692fbde.js', null, null, false );
+	
 	// Enqueue Slick Slider js
-	wp_enqueue_script( 'jb_ewm_slick_style', '//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js', array( 'jquery' ));
+	wp_enqueue_script( 'jb_ewm-slick-style', get_template_directory_uri() . '/js/custom.js', array( 'jquery' ));
+
+	// Enqueue Custom js
+	wp_enqueue_script( 'jb_ewm-custom', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'jb_ewm_scripts' );
+
+function ewm_scripts( $hook ) {
+
+	// Activate media scripts
+	wp_enqueue_media();
+
+	// Register and call custom script for admin
+	wp_register_script( 'ewm_admin', get_template_directory_uri() . '/js/ewm-admin.js', array('jquery'), '1.0.0', true );
+	wp_enqueue_script( 'ewm_admin' );
+
+}
+add_action( 'admin_enqueue_scripts', 'ewm_scripts' );
 
 /**
  * Implement the Custom Header feature.

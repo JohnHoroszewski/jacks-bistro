@@ -10,13 +10,11 @@ sass.compiler = require('node-sass');
 // Create browsersyn function
 function sync(done) {
   browserSync.init({
-    files: [
-      './**/*.php'
-    ],
+    files: './**/*.php',
     // Changegit
     proxy: 'http://localhost/jacks-bistro'
   });
-  done();
+  // done();
 }
 
 // Create sass and sourcemaps function

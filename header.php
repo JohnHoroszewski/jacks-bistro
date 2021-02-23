@@ -19,40 +19,58 @@
 
 	<?php wp_head(); ?>
 </head>
-
+	<?php
+		$logo = esc_attr( get_option( 'logo_image') );
+	?>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'jb_ewm' ); ?></a>
-
 	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+		<div class="mobile-menu">
+			<i class="fa fa-times" aria-hidden="true"></i>
+		</div>
+		<div class="constrain">
+			<div class="site-branding">
 				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$jb_ewm_description = get_bloginfo( 'description', 'display' );
-			if ( $jb_ewm_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $jb_ewm_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
+				if ( is_front_page() && is_home() ) :
+					?>
+					<h1 class="site-title">
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+							<img class="site-logo-main" src="<?php echo $logo; ?>" alt="">
+							<span class="site-name">
+								<?php bloginfo( 'name' ); ?>
+							</span>
+						</a>
+					</h1>
+					<?php
+				else :
+					?>
+					<p class="site-title">
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+							<img class="site-logo-main" src="<?php echo $logo; ?>" alt="">
+							<span class="site-name">
+								<?php bloginfo( 'name' ); ?>
+							</span>
+						</a>
+					</p>
+					<?php
+				endif;
+				
+				if ( $jb_ewm_description || is_customize_preview() ) :
+					?>
+					<p class="site-description"><?php echo $jb_ewm_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+				<?php endif; ?>
+			</div><!-- .site-branding -->
 
-		<nav id="site-navigation" class="main-navigation">
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
-				)
-			);
-			?>
-		</nav><!-- #site-navigation -->
+			<nav id="site-navigation" class="main-navigation">
+				<?php
+				wp_nav_menu(
+					array(
+						'theme_location' => 'menu-1',
+						'menu_id'        => 'primary-menu',
+					)
+				);
+				?>
+			</nav><!-- #site-navigation -->
+		</div>
 	</header><!-- #masthead -->

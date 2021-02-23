@@ -2,6 +2,9 @@
 --------------------------------------------- */
 body {
 	background: #fff;
+	font-family: $content;
+	font-weight: 300;
+	letter-spacing: .35px;
 }
 
 hr {
@@ -13,11 +16,12 @@ hr {
 
 ul,
 ol {
-	margin: 0 0 1.5em 3em;
+	margin: 0;
+	padding: 0;
 }
 
 ul {
-	list-style: disc;
+	list-style: none;
 }
 
 ol {
